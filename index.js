@@ -49,7 +49,9 @@ const initApp = () => {
 		const userTextName = document.createElement('p');
 		const userTextLocation = document.createElement('p');
 
+		const postImgWrapper = document.createElement('div');
 		const postImg = document.createElement('img');
+		const postImgLike = document.createElement('img');
 
 		const interactSection = document.createElement('div');
 		const interactIcons = document.createElement('div');
@@ -62,42 +64,50 @@ const initApp = () => {
 
 		// WRAPPER
 		fragment.append(article);
-		article.append(user, postImg, interactSection);
+		article.append(user, postImgWrapper, interactSection);
 
-		// USER
+		// POST USER
 		user.classList = 'post_user';
 		user.append(userAvatar, userTextWrapper);
-		// IMG AVATAR
+		// POST USER AVATAR
 		userAvatar.src = avatar;
 		userAvatar.alt = 'post user avatar';
 		userAvatar.width = '34';
 		userAvatar.height = '34';
-		userAvatar.classList = 'post_user_avatar img_avatar';
-		// TEXT WRAPPER
+		userAvatar.classList = 'user_avatar';
+		// POST USER TEXT WRAPPER
 		userTextWrapper.append(userTextName, userTextLocation);
-		// TEXT
+		// POST USER NAME/LOCATION
 		userTextName.classList = 'text_bold';
 		userTextName.textContent = name;
 		userTextLocation.textContent = location;
 
+		// POST IMG WRAPPER
+		postImgWrapper.classList = 'post_img_wrapper';
+		postImgWrapper.append(postImg, postImgLike);
 		// POST IMG
 		postImg.src = image;
-		postImg.alt = 'post_image';
-		postImg.classList = 'post_image';
-		postImg.id = 'image_like' + id;
+		postImg.alt = 'post image';
+		postImg.classList = 'post_img';
+		postImg.id = 'post_img' + id;
+		// POST IMG HEART ICON
+		postImgLike.src = 'images/icon-heart-filled.svg';
+		postImgLike.alt = 'post image heart';
+		postImgLike.classList = 'post_img_icon_heart';
+		postImgLike.id = 'post_img_icon_heart' + id;
 
 		// INTERACT SECTION
-		interactSection.classList = 'interact_section';
+		interactSection.classList = 'post_interact_section';
 		interactSection.append(interactIcons, postLikes, postComment);
 		// ICONS WRAPPER
-		interactIcons.classList = 'icons';
+		interactIcons.classList = 'post_interact_icons';
 		interactIcons.append(interactIconHeart, interactIconChat, interactIconShare);
 		// ICONS
 		interactIconHeart.src = 'images/icon-heart.svg';
 		interactIconHeart.alt = 'heart icon';
 		interactIconHeart.width = '24';
 		interactIconHeart.height = '24';
-		interactIconHeart.id = 'icon_like' + id;
+		interactIconHeart.id = 'post_icon_like' + id;
 
 		interactIconChat.src = 'images/icon-chat.svg';
 		interactIconChat.alt = 'chat bubble icon';
@@ -125,8 +135,10 @@ const initApp = () => {
 
 	for (let i = 0; i < posts.length; i++) {
 		let { likes, liked, id } = posts[i];
-		const postImage = document.getElementById('image_like' + id);
-		const postLikeIcon = document.getElementById('icon_like' + id);
+		const postImage = document.getElementById('post_img' + id);
+		const postImageIcon = document.getElementById('post_img_icon_heart' + id);
+
+		const postLikeIcon = document.getElementById('post_icon_like' + id);
 		const postLikes = document.getElementById('post_likes' + id);
 
 		// WHEN POST IS LIKED
@@ -134,13 +146,18 @@ const initApp = () => {
 			if (liked === false) {
 				liked = true;
 				likes += 1;
+				// ADD A LIKE
 				postLikes.textContent = likes + ' likes';
+				// TO SHOW USER THAT POST WAS LIKED
 				postLikeIcon.classList = 'post_liked';
+				postImageIcon.id = 'post_img_icon_heart';
 			} else {
 				liked = false;
 				likes -= 1;
+				// REMOVE THE USER LIKE + THE VISUAL ASPECT OF A LIKE
 				postLikes.textContent = likes + ' likes';
 				postLikeIcon.classList = '';
+				postImageIcon.id = '';
 			}
 		};
 		// ADD LIKE WHEN DOUBLE-CLICKING POST
