@@ -35,6 +35,10 @@ p {
 	font-weight: 700;
 }
 
+.img_avatar {
+	border-radius: 50px;
+}
+
 /* HEADER */
 header {
 	align-items: center;
@@ -42,9 +46,6 @@ header {
 	display: flex;
 	justify-content: space-between;
 	padding: 16px;
-}
-header img:last-of-type {
-	border-radius: 50px;
 }
 
 /* MAIN */
@@ -66,29 +67,37 @@ article .post_user {
 	gap: 6px;
 	padding: 10px;
 }
-article .post_user_avatar {
-	border-radius: 50px;
-}
 article .post_user_location {
 	font-size: 0.8rem;
 }
 
 /* POST IMG */
 article .post_image {
+	cursor: pointer;
 	width: 100%;
 }
 
 /* POST INTERACT SECTION */
-article .post_interact_section_wrapper {
+article .interact_section {
 	padding: 16px 10px;
 }
-article .post_interact_section_wrapper .icons {
+article .interact_section .icons {
 	display: flex;
-	gap: 20px;
-	margin-bottom: 13px;
-}
-article .post_interact_section_wrapper .post_text:not(:last-of-type) {
+	font-size: 0;
+	gap: 14px;
 	margin-bottom: 12px;
+}
+article .interact_section .icons img:hover {
+	opacity: 0.7;
+	cursor: pointer;
+}
+article .interact_section .post_text:not(:last-of-type) {
+	margin-bottom: 12px;
+}
+
+/* CHANGES COLOR OF SVG */
+article .interact_section .post_liked {
+	filter: invert(12%) sepia(86%) saturate(5775%) hue-rotate(332deg) brightness(104%) contrast(109%);
 }
 
 @media screen and (max-width: 375px) {
