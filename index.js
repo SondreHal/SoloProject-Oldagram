@@ -129,8 +129,8 @@ const initApp = () => {
 		const postLikeIcon = document.getElementById('icon_like' + id);
 		const postLikes = document.getElementById('post_likes' + id);
 
-		// ADD LIKE WHEN DOUBLE-CLICKING POST
-		postImage.addEventListener('dblclick', () => {
+		// WHEN POST IS LIKED
+		const likePost = () => {
 			if (liked === false) {
 				liked = true;
 				likes += 1;
@@ -142,21 +142,14 @@ const initApp = () => {
 				postLikes.textContent = likes + ' likes';
 				postLikeIcon.classList = '';
 			}
+		};
+		// ADD LIKE WHEN DOUBLE-CLICKING POST
+		postImage.addEventListener('dblclick', () => {
+			likePost();
 		});
 		// ADD LIKE WHEN CLICKING LIKE
 		postLikeIcon.addEventListener('click', () => {
-			if (liked === false) {
-				liked = true;
-				likes += 1;
-				postLikes.width = '30';
-				postLikes.textContent = likes + ' likes';
-				postLikeIcon.classList = 'post_liked';
-			} else {
-				liked = false;
-				likes -= 1;
-				postLikes.textContent = likes + ' likes';
-				postLikeIcon.classList = '';
-			}
+			likePost();
 		});
 	}
 };
